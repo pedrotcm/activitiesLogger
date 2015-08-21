@@ -1,2 +1,2 @@
 # activitiesLogger
-Registrar e armazenar atividades realizadas.
+Aplicativo para registrar e armazenar atividades realizadas.
