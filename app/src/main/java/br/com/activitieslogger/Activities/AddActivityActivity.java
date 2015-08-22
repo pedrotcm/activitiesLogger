@@ -33,7 +33,7 @@ import br.com.activitieslogger.entities.Activity;
 
 public class AddActivityActivity extends AppCompatActivity {
 
-    private static String SELECT_TYPE = "Selecione uma exercício...";
+    private static String SELECT_TYPE = "Selecione um exercício...";
     private Toolbar mToolbar;
     private EditText et_timeActivity;
     private Spinner sp_typeActivity;
