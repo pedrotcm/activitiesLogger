@@ -3,12 +3,17 @@
     package="br.com.activitieslogger" >
 
     <application
+        android:name="com.activeandroid.app.Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/Theme.MyTheme" >
+
+        <meta-data android:name="AA_DB_NAME" android:value="ActivitiesLogger.db" />
+        <meta-data android:name="AA_DB_VERSION" android:value="1" />
+
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Fragments.AddActivityFragment"/>
+
     </application>
 
 </manifest>

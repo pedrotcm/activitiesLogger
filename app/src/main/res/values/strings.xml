@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">ActivitiesLogger</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
+    <string name="add">Adicionar</string>
+    <string name="time">Tempo</string>
+    <string name="activity">Exercício</string>
+    <string name="dateHint">dd/mm/aaaa</string>
+    <string name="addActivity">Adicionar Exercício</string>
 </resources>
