@@ -12,6 +12,7 @@ import br.com.activitieslogger.entities.Activity;
 public class ActivityRepository {
 
 	public static List<Activity> getAllActivities() {
+        //Select via ActiveAndroid para buscar todos os exercicios
 		return new Select().from( Activity.class ).orderBy("data_criacao DESC, tempo_exercicio DESC").execute();
 
 	}
