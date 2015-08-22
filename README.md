@@ -3,7 +3,8 @@ Aplicativo para registrar e armazenar exercícios realizados.
 
 <h3>SETUP</h3>
 1- Baixar o projeto e importá-lo no Android Studio.</br>
-2- Executar o projeto em algum dispositivo ou emulador Android.</br>
+2- Caso possua erros execute Build>Rebuild Project.</br>
+3- Executar o projeto em algum dispositivo ou emulador Android.</br>
 
 <h3>SOBRE</h3>
 O aplicativo permite o registro, alteração e remoção de exercícios.</br>
