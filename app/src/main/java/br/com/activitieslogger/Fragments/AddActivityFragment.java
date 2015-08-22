@@ -22,6 +22,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.activeandroid.Model;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,8 +41,15 @@ public class AddActivityFragment extends AppCompatActivity {
     private ImageButton ib_date;
     private Button bt_add;
     private int mYear, mMonth, mDay, mTimeActivity;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private String CREATE_UPDATE_MSG = "Exercício criado com sucesso";
+
+
+    private Activity activity;
 
     public void init() {
+        activity = new Activity();
+
         et_timeActivity = (EditText) findViewById(R.id.et_timeActivity);
         tv_dateCreated = (TextView) findViewById(R.id.tv_dateCreated);
         sp_typeActivity = (Spinner) findViewById(R.id.sp_typeActivity);
@@ -49,6 +58,19 @@ public class AddActivityFragment extends AppCompatActivity {
 
         et_timeActivity.setText("0h");
         setCurrentDate();
+
+        String[] typeActivities = {SELECT_TYPE, "Bicicleta", "Corrida", "Futebol", "Natação", "Vôlei"};
+        ArrayAdapter<String> adapterTypeActivity = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, typeActivities);
+        sp_typeActivity.setAdapter(adapterTypeActivity);
+
+        if (getIntent().getLongExtra("idActivity", 0) != 0){
+            activity = Model.load(Activity.class, getIntent().getExtras().getLong("idActivity"));
+            bt_add.setText("Atualizar");
+            CREATE_UPDATE_MSG = "Exercício atualizado com sucesso";
+            et_timeActivity.setText(activity.getTimeActivity() + "h");
+            sp_typeActivity.setSelection(adapterTypeActivity.getPosition(activity.getTypeActivity()));
+            tv_dateCreated.setText(dateFormat.format(activity.getDateCreated()));
+        }
     }
 
     private void setCurrentDate() {
@@ -72,10 +94,6 @@ public class AddActivityFragment extends AppCompatActivity {
         getSupportActionBar().setTitle("Adicionar exercício");
 
         init();
-
-        String[] typeActivities = {SELECT_TYPE, "Bicicleta", "Corrida", "Futebol", "Natação", "Vôlei"};
-        ArrayAdapter<String> adapterTypeActivity = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, typeActivities);
-        sp_typeActivity.setAdapter(adapterTypeActivity);
 
         et_timeActivity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,8 +133,6 @@ public class AddActivityFragment extends AppCompatActivity {
     }
 
     private void saveActivity() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Activity activity = new Activity();
         activity.setTimeActivity(Integer.valueOf(et_timeActivity.getText().toString().substring(0, et_timeActivity.getText().length() - 1)));
         activity.setTypeActivity((String) sp_typeActivity.getSelectedItem());
         try {
@@ -125,7 +141,7 @@ public class AddActivityFragment extends AppCompatActivity {
             e.printStackTrace();
         }
         activity.save();
-        Toast.makeText(this, "Exercício adicionado com sucesso", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, CREATE_UPDATE_MSG, Toast.LENGTH_LONG).show();
 
         finish();
 
@@ -133,7 +149,7 @@ public class AddActivityFragment extends AppCompatActivity {
 
     private boolean validData() {
         if (et_timeActivity.getText().toString().equalsIgnoreCase("0h")) {
-            Toast.makeText(this, "Tempo de exercício obrigatório", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Tempo de exercício deve ser maior que zero", Toast.LENGTH_LONG).show();
             return false;
         } else if (((String) sp_typeActivity.getSelectedItem()).equalsIgnoreCase(SELECT_TYPE)) {
             Toast.makeText(this, "Um tipo de exercício deve ser selecionado", Toast.LENGTH_LONG).show();
@@ -189,6 +205,8 @@ public class AddActivityFragment extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
+
 
 }
 

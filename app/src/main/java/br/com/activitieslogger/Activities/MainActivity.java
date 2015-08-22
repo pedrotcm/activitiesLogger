@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -90,12 +89,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
 
     @Override
     public void onClickListener(View view, int position) {
-        Toast.makeText(this, "onClickListener(): " + position, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, AddActivityFragment.class);
+        intent.putExtra("idActivity", adapter.getActivity(position).getId());
+        startActivity(intent);
     }
 
     @Override
     public void onDeleteClickListener(View view, int position) {
+        Activity activity = adapter.getActivity(position);
         adapter.removeListItem(position);
+        activity.delete();
     }
 
 }

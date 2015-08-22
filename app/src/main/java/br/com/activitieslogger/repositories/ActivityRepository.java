@@ -9,7 +9,7 @@ import br.com.activitieslogger.entities.Activity;
 public class ActivityRepository {
 
 	public static List<Activity> getAllActivities() {
-		return new Select().from( Activity.class ).execute();
+		return new Select().from( Activity.class ).orderBy("data_criacao DESC, tempo_exercicio DESC").execute();
 
 	}
 
