@@ -43,6 +43,7 @@ public class AddActivityActivity extends AppCompatActivity {
     private int mYear, mMonth, mDay, mTimeActivity;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private String CREATE_UPDATE_MSG = "Exercício criado com sucesso";
+    private String TITLE = "Adicionar exercício";
 
 
     private Activity activity;
@@ -69,6 +70,7 @@ public class AddActivityActivity extends AppCompatActivity {
             activity = Model.load(Activity.class, getIntent().getExtras().getLong("idActivity"));
             bt_add.setText("Atualizar");
             CREATE_UPDATE_MSG = "Exercício atualizado com sucesso";
+            TITLE = "Atualizar exercício";
             et_timeActivity.setText(activity.getTimeActivity() + "h");
             sp_typeActivity.setSelection(adapterTypeActivity.getPosition(activity.getTypeActivity()));
             tv_dateCreated.setText(dateFormat.format(activity.getDateCreated()));
@@ -93,7 +95,7 @@ public class AddActivityActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Adicionar exercício");
+        getSupportActionBar().setTitle(TITLE);
 
         init();
 
