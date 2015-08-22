@@ -13,13 +13,15 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import br.com.activitieslogger.Fragments.AddActivityFragment;
 import br.com.activitieslogger.R;
 import br.com.activitieslogger.adapters.ActivityAdapter;
 import br.com.activitieslogger.entities.Activity;
 import br.com.activitieslogger.interfaces.RecyclerViewOnClickListenerHack;
 import br.com.activitieslogger.repositories.ActivityRepository;
 
+/**
+ * Created by PedroTome on 21/08/15.
+ */
 public class MainActivity extends AppCompatActivity implements RecyclerViewOnClickListenerHack {
 
     private Toolbar mToolbar;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Inicia os componentes da view
         tv_time_total = (TextView) findViewById(R.id.tv_time_total);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(getResources().getString(R.string.app_name));
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
     @Override
     protected void onResume() {
         super.onResume();
+        //Quando abrir a activity e quando voltar da criação do exercício é calculado a quantidade de horas realizadas
         activities = ActivityRepository.getAllActivities();
         adapter = new ActivityAdapter( this, activities, tv_time_total );
         adapter.setRecyclerViewOnClickListenerHack(this);
@@ -66,7 +70,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
     }
 
     public void addActivity(View v){
-        Intent intent = new Intent(this,AddActivityFragment.class);
+        //Inicia a criação do exercício
+        Intent intent = new Intent(this,AddActivityActivity.class);
         startActivity(intent);
     }
 
@@ -89,13 +94,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
 
     @Override
     public void onClickListener(View view, int position) {
-        Intent intent = new Intent(this, AddActivityFragment.class);
+        //Inicia a activity de criação de exercício para fazer a atualização do exercício
+        Intent intent = new Intent(this, AddActivityActivity.class);
         intent.putExtra("idActivity", adapter.getActivity(position).getId());
         startActivity(intent);
     }
 
     @Override
     public void onDeleteClickListener(View view, int position) {
+        //Remove o exercício selecionado
         Activity activity = adapter.getActivity(position);
         adapter.removeListItem(position);
         activity.delete();

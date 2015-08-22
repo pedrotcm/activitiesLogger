@@ -15,6 +15,9 @@ import br.com.activitieslogger.R;
 import br.com.activitieslogger.entities.Activity;
 import br.com.activitieslogger.interfaces.RecyclerViewOnClickListenerHack;
 
+/**
+ * Created by PedroTome on 21/08/15.
+ */
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyViewHolder> {
     private List<Activity> mList;
     private LayoutInflater mLayoutInflater;

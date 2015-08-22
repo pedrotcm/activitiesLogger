@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Fragments.AddActivityFragment"/>
+        <activity android:name=".Activities.AddActivityActivity"/>
 
     </application>
 

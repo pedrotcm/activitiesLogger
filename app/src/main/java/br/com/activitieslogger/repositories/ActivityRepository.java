@@ -6,6 +6,9 @@ import java.util.List;
 
 import br.com.activitieslogger.entities.Activity;
 
+/**
+ * Created by PedroTome on 21/08/15.
+ */
 public class ActivityRepository {
 
 	public static List<Activity> getAllActivities() {
